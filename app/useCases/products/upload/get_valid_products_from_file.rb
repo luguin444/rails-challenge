@@ -1,6 +1,7 @@
 class Products::Upload::GetValidProductsFromFile
-  def initialize(file)
+  def initialize(file, upload_file_id)
     @file = file
+    @upload_file_id = upload_file_id
     @products = []
     @errors = []
   end
@@ -15,7 +16,7 @@ class Products::Upload::GetValidProductsFromFile
         expiration = sanitize_expiration(row[2])
 
         if name && code && price && expiration
-          @products << { name: name, price: price, expiration: expiration, code: code }
+          @products << { name: name, price: price, expiration: expiration, code: code, upload_file_id: @upload_file_id }
         end
       rescue => e
         @errors << { csv_error_line: index + 1, error: e.message }

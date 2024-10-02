@@ -10,6 +10,8 @@ class Products::Upload::UploadFileToBucket
     s3_object = S3_BUCKET.object(new_file_name)
     s3_object.put(body: @file.read)
 
-    UploadFile.create!(file_url: s3_object.public_url)
+    upload_file = UploadFile.create!(file_url: s3_object.public_url)
+    
+    return upload_file
   end
 end
