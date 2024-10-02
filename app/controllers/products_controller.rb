@@ -10,8 +10,7 @@ class ProductsController < ApplicationController
 
     # Products::Upload::UploadFileToBucket.new(file).exec
     valid_products, errors = Products::Upload::GetValidProductsFromFile.new(file).exec
-
-
+    currencies_rates = Products::Upload::GetCurrenciesRates.new().exec
 
 
     puts "fim da rota"

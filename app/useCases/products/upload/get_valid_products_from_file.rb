@@ -29,7 +29,7 @@ class Products::Upload::GetValidProductsFromFile
 
   def sanitize_name_with_code(name_with_code)
     begin
-      match_data = name_with_code.match(/(.+?)\s+\#\((\d+)\)/)
+      match_data = name_with_code.match(/(.+?)\s+\#\((\d+)\)/) # Grab all characters until the first " #" and then grab all digits
       name = sanitize_input(match_data[1].strip)
       code = sanitize_input(match_data[2].strip)
 
