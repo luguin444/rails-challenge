@@ -8,6 +8,13 @@ gem "rails", "~> 7.1.4"
 # Use postgres as the database for Active Record
 gem 'pg'
 
+# USE aws buckets
+gem 'aws-sdk-s3'
+
+gem 'dotenv-rails'
+
+gem 'csv'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
