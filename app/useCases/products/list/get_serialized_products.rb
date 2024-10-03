@@ -7,7 +7,7 @@ class Products::List::GetSerializedProducts
     products_filtered_and_sorted = Product.ransack(@filter_and_sort_params).result
     upload_file_ids = products_filtered_and_sorted.map(&:upload_file_id)
 
-    currencies_rates = CurrencyRate.includes(:currency).where(upload_file_id: upload_file_ids)
+    currencies_rates = CurrencyRate.where(upload_file_id: upload_file_ids).includes(:currency)
 
     products_with_currency_rates = serialize(products_filtered_and_sorted, currencies_rates)
     products_with_currency_rates
