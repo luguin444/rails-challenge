@@ -10,7 +10,7 @@ RSpec.describe Products::Upload::UploadFileToBucket do
   end
 
   describe 'exec' do
-    it "should calls S3_BUCKET.object with the timestamps and filename" do
+    it "should call S3_BUCKET.object with the timestamps and filename" do
       timestamp = Time.now.strftime("%Y%m%d%H%M%S")
       expected_file_name = "#{timestamp}_#{file.original_filename}"
 
@@ -19,13 +19,13 @@ RSpec.describe Products::Upload::UploadFileToBucket do
       expect(S3_BUCKET).to have_received(:object).with(expected_file_name)
     end
 
-    it "should calls put with the correct file content" do
+    it "should call put with the correct file content" do
       Products::Upload::UploadFileToBucket.new(file).exec
 
       expect(s3_object).to have_received(:put).with(body: "file content")
     end
 
-    it "creates the UploadFile correctly with the public_url" do
+    it "should create the UploadFile correctly with the public_url" do
       Products::Upload::UploadFileToBucket.new(file).exec
     
       upload_file = UploadFile.last
@@ -33,7 +33,7 @@ RSpec.describe Products::Upload::UploadFileToBucket do
       expect(upload_file.file_url).to eq(s3_object.public_url)
     end
 
-    it "returns the created upload_file" do
+    it " should return the created upload_file" do
       result =  Products::Upload::UploadFileToBucket.new(file).exec
       
       expect(result).to eq(UploadFile.last)
