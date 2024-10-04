@@ -49,6 +49,40 @@ RSpec.describe ProductsController, type: :request do
     end
   end
 
+  describe 'POST /products/upload' do
+    let!(:productA) { FactoryBot.create(:product, name: 'Product A', price: 100) }
+    let!(:productB) { FactoryBot.create(:product, name: 'Product B', price: 200) }
+    let!(:productC) { FactoryBot.create(:product, name: 'Product C', price: 300) }
+
+    it 'should return a 400 error, since no file was provided' do
+      post "/products/upload", params: { file: nil }
+
+      expect(response).to have_http_status(:bad_request)
+      expect(json_response).to include({"message" => "File must be sent in CSV format"})
+    end
+
+    it 'should return a 400 error, since file is not CSV' do
+      pdf_file = fixture_file_upload('spec/fixtures/test.pdf', 'application/pdf')
+      post "/products/upload", params: { file: pdf_file }
+
+      expect(response).to have_http_status(:bad_request)
+      expect(json_response).to include({"message" => "File must be sent in CSV format"})
+    end
+
+    it 'should return a 200 status and processes the file' do
+      upload_file = FactoryBot.create(:upload_file)
+      expect_any_instance_of(Products::Upload::UploadFileToBucket).to receive(:exec).and_return upload_file
+      expect(UploadFileJob).to receive(:perform_async).with(upload_file.id)
+
+      csv_file = fixture_file_upload('spec/fixtures/integration_test.csv', 'application/csv')
+      post "/products/upload", params: { file: csv_file }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('File saved and data being processed!')
+    end
+
+  end
+
   def json_response
     JSON.parse(response.body)
   end

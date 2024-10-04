@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 
     UploadFileJob.perform_async(upload_file.id)
 
-    render json: { status: "File saved and data being processed!" }, status: :ok
+    render json: { status: "File saved and data being processed!", file_url: upload_file.file_url }, status: :ok
   end
 
   def index
