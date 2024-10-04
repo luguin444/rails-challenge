@@ -1,13 +1,13 @@
 class Products::Upload::GetValidProductsFromFile
-  def initialize(file, upload_file_id)
-    @file = file
+  def initialize(local_file_path, upload_file_id)
+    @file_path = local_file_path
     @upload_file_id = upload_file_id
     @products = []
     @errors = []
   end
 
   def exec
-    CSV.foreach(@file.path, col_sep: ';').with_index do |row, index|
+    CSV.foreach(@file_path, col_sep: ';').with_index do |row, index|
       next if index == 0
 
       begin

@@ -19,6 +19,8 @@ gem 'httparty'
 
 gem 'ransack'
 
+gem 'sidekiq', '~> 7.2'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 

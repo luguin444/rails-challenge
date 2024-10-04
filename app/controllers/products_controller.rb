@@ -8,13 +8,10 @@ class ProductsController < ApplicationController
     end
 
     upload_file = Products::Upload::UploadFileToBucket.new(file).exec
-    valid_products, errors = Products::Upload::GetValidProductsFromFile.new(file, upload_file.id).exec
-    currencies_rates = Products::Upload::GetCurrenciesRates.new(upload_file.id).exec
 
-    Product.insert_all(valid_products)
-    CurrencyRate.insert_all(currencies_rates)
+    UploadFileJob.perform_async(upload_file.id)
 
-    render json: { products_inserted: valid_products.length, errors: { quantity: errors.length, details: errors } } , status: :ok
+    render json: { status: "File saved and data being processed!" }, status: :ok
   end
 
   def index
