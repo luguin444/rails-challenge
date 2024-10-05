@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    command: ["rails", "server", "-b", "0.0.0.0"]
+    env_file:
+      - .env.dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env.dockerfile
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+
+  sidekiq:
+    build: .
+    command: ["bundle", "exec", "sidekiq"]
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - .env.dockerfile
+
+volumes:
+  db_data:
