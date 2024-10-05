@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "36d375d3-ced1-46ff-b1d8-89da75a87865",
+		"name": "Rails Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_dev}}/products?q[s]=price+asc",
+					"host": [
+						"{{url_dev}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "q[s]",
+							"value": "price+asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_dev}}/health",
+					"host": [
+						"{{url_dev}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload File",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-Token",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/luis/Documents/data.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_dev}}/products/upload",
+					"host": [
+						"{{url_dev}}"
+					],
+					"path": [
+						"products",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-Token",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/luis/Documents/data.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_dev}}/products/test",
+					"host": [
+						"{{url_dev}}"
+					],
+					"path": [
+						"products",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_dev",
+			"value": ""
+		}
+	]
+}
