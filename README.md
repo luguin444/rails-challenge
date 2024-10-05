@@ -53,7 +53,7 @@ To check, run: `ruby -v`, `rails -v`, `psql --version` and `redis-server --versi
 
 2. Navigate to the project directory "rails_test-luisg" `cd rails_test-luisg/`
 
-3. In both terminals run `bundle install`
+3. In the terminal, run `bundle install`
 
 4. Create in the root directory the `.env file` based on the `.env` shared in the email;
 
@@ -64,17 +64,17 @@ To check, run: `ruby -v`, `rails -v`, `psql --version` and `redis-server --versi
    - Development: `CREATE DATABASE development_products_api;`
    - Test: `CREATE DATABASE test_products_api;`
 
-6. Run in the terminals `rails server`.
+6. Run the server `rails server`.
 
    - Troubleshooting: If the containers are started, there will be conflict of ports. Stop them with: `docker-compose down`
 
 ## How to run the tests?
 
-1. If you are running the application locally without containers, just run the command `bundle exec rspec` in the project directory. Just make sure to have your test database created;
+1. If you are running the application locally without containers, just run the command `bundle exec rspec` in the project directory. Make sure to have your test database created;
 
 2. If you are using containers:
 
-- Access the app container: `docker exec -it rails_test-luisg_app_1 bash`
+- Access the app container: `docker exec -it <container_name_from_server> bash`. To grab this name, just run `docker ps`
 - Run the tests: `bundle exec rspec`
 
 The tests will be printed !!
