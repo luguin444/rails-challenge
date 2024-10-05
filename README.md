@@ -68,6 +68,9 @@ To check, run: `ruby -v`, `rails -v`, `psql --version` and `redis-server --versi
 
    - Troubleshooting: If the containers are started, there will be conflict of ports. Stop them with: `docker-compose down`
 
+7. Run Sidekiq in another terminal and in the project directory:
+   - `bundle exec sidekiq`
+
 ## How to run the tests?
 
 1. If you are running the application locally without containers, just run the command `bundle exec rspec` in the project directory. Make sure to have your test database created;
@@ -80,3 +83,5 @@ To check, run: `ruby -v`, `rails -v`, `psql --version` and `redis-server --versi
 The tests will be printed !!
 
 ## API Documentation: https://www.notion.so/luguin444/Rails-Test-documentation-1162a646ef5280c38021d3a39c772f8d
+
+## Video Presentation: https://share.vidyard.com/watch/11puc79MSBucVvD8od8hL2?
